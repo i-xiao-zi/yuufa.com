@@ -1,4 +1,5 @@
 {
+  "name": "yuufa.com",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -11,7 +12,6 @@
     "prettier": "^3.2.5",
     "turbo": "^2.7.5"
   },
-  "name": "yuufa.com",
   "packageManager": "yarn@1.22.22",
   "workspaces": [
     "apps/*",
