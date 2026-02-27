@@ -1,0 +1,23 @@
+# compiled output
+/dist
+/node_modules
+/build
+/.out
+# Logs
+logs
+.idea
+.DS_Store
+node_modules
+.turbo
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+dist
+dist-ssr
+*.local
+.env
+.cache
