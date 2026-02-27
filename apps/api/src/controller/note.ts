@@ -5,7 +5,7 @@ import { ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import NoteService from '../service/note';
 import NoteCategory from '../entity/note_category';
 import {CreateNoteContent, UpdateNoteContent} from '../validator/note';
-import NoteContent from 'src/entity/note_content';
+import NoteContent from '../entity/note_content';
 
 @ApiTags("笔记")
 @Controller("note")

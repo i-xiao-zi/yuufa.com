@@ -3,7 +3,7 @@ import Json from '../decorator/json';
 import Public from "../decorator/public";
 import "multer";
 import {ApiTags} from "@nestjs/swagger";
-import CronService from 'src/service/cron';
+import CronService from '../service/cron';
 
 @ApiTags("Cron")
 @Controller('cron')
