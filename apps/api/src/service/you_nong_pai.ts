@@ -26,6 +26,7 @@ export default class YouNongPaiService {
     let res = {};
     for (const {token, name} of ynps) {
       const tasks = await this.growthTask(token);
+      res[name] = {};
       for(const task of tasks) {
         if (task.isFinish === 0) {
           switch(task.taskType) {
