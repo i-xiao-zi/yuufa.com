@@ -13,6 +13,8 @@ import NoteController from './controller/note';
 import NoteService from './service/note';
 import CronController from './controller/cron';
 import CronService from './service/cron';
+import YouNongPaiController from "./controller/you_nong_pai";
+import YouNongPaiService from "./service/you_nong_pai";
 
 @Module({
   imports: [
@@ -24,6 +26,7 @@ import CronService from './service/cron';
   controllers: [
     AppController,
     CronController,
+    YouNongPaiController,
     AuthController,
     NoteController,
     SearchorController
@@ -31,6 +34,7 @@ import CronService from './service/cron';
   providers: [
     AppService,
     CronService,
+    YouNongPaiService,
     AuthService,
     NoteService,
     SearchorService,

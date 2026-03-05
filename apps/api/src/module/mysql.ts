@@ -13,6 +13,8 @@ import NoteCategoryModelService from '../service/note_category.model';
 import NoteContentModelService from '../service/note_content.model';
 import NoteCategory from '../entity/note_category';
 import NoteContent from '../entity/note_content';
+import YouNongPai from "../entity/you_nong_pai";
+import YouNongPaiModelService from "../service/you_nong_pai.model";
 
 @Module({
   imports: [
@@ -37,9 +39,9 @@ import NoteContent from '../entity/note_content';
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([User, Searchor, SearchorType, NoteCategory, NoteContent]),
+    TypeOrmModule.forFeature([User, Searchor, SearchorType, NoteCategory, NoteContent, YouNongPai]),
   ],
-  providers: [UserModelService, SearchorModelService, SearchorTypeModelService, NoteCategoryModelService, NoteContentModelService],
-  exports: [UserModelService, SearchorModelService, SearchorTypeModelService, NoteCategoryModelService, NoteContentModelService],
+  providers: [UserModelService, SearchorModelService, SearchorTypeModelService, NoteCategoryModelService, NoteContentModelService, YouNongPaiModelService],
+  exports: [UserModelService, SearchorModelService, SearchorTypeModelService, NoteCategoryModelService, NoteContentModelService, YouNongPaiModelService],
 })
 export default class MysqlModule {}

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import {ColorSchemeScript, mantineHtmlProps, MantineProvider, NavLink } from "@mantine/core";
+import {ColorSchemeScript, mantineHtmlProps, MantineProvider, NavLink, Menu } from "@mantine/core";
 import { ContextMenuProvider } from "mantine-contextmenu";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import {usePathname} from "next/navigation";
@@ -29,10 +29,19 @@ export default function Layout({children}: React.PropsWithChildren){
             <header>
               <nav className="fixed top-0 right-0 w-full z-9999">
                 <div className="container mx-auto flex justify-between items-center">
-                  <div className="flex items-center">
+                  <div className="flex items-center whitespace-nowrap">
                     <NavLink href="/" label="首页" active={pathname == "/"} variant="filled" />
                     <NavLink href="/note" label="Note" active={pathname.startsWith("/note")} variant="filled" />
+                    <Menu shadow="md" width={200}>
+                      <Menu.Target>
+                        <NavLink label="我的" active={pathname.startsWith("/mine")} variant="filled" />
+                      </Menu.Target>
+                      <Menu.Dropdown>
+                        <Menu.Item component="a" href="/mine/you_nong_pai">优农派</Menu.Item>
+                      </Menu.Dropdown>
+                    </Menu>
                   </div>
+                  <div className="flex-auto"></div>
                   <div className="flex items-center">
                     <Scheme />
                   </div>

@@ -1,6 +1,5 @@
 import {Injectable} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import Searchor from '../entity/searchor';
 import {DeepPartial, Repository} from 'typeorm';
 import SearchorType from "../entity/searchor_type";
 
