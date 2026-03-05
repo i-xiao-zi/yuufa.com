@@ -35,7 +35,37 @@ export interface YouNongPaiToken {
     token: string;
 }
 
-export interface YouNongPaiLog {
+export interface YouNongPaiUser {
+    nickName: string;
+    userName: string;
+    header: string;
+    gender: number;
+    birthday: number;
+    phone: string;
+    inviteName: string;
+    verifyState: number;
+    memberType: number;
+    isOfficial: number;
+    userId: number;
+    referrerId: number;
+    wechatNo: string;
+    qrcode: string;
+    selectPhone: null | string;
+    createTime: number;
+    unionName: string;
+    unionPhone: string;
+    areaServName: string;
+    areaServPhone: string;
+    isSetPayPwd: number; // 0 表示未设置支付密码
+}
+export interface YouNongPaiDrawInfo {
+    balance: number;
+    freezeBalance: number;
+    totalBalance: number;
+    tocUsedBalance: number;
+    getCashImg: string;
+}
+export interface YouNongPaiDrawLog {
     logId: number;
     fromLogId: number;
     des: string;
@@ -51,40 +81,48 @@ export interface YouNongPaiLog {
     createTime: number;
     productTime: number;
 }
-    export interface YouNongPaiUser {
-        nickName: string;
-        userName: string;
-        header: string;
-        gender: number;
-        birthday: number;
-        phone: string;
-        inviteName: string;
-        verifyState: number;
-        memberType: number;
-        isOfficial: number;
-        userId: number;
-        referrerId: number;
-        wechatNo: string;
-        qrcode: string;
-        selectPhone: null | string;
-        createTime: number;
-        unionName: string;
-        unionPhone: string;
-        areaServName: string;
-        areaServPhone: string;
-        isSetPayPwd: number; // 0 表示未设置支付密码
-    }
-export interface YouNongPaiBalance {
-    balance: number;
-    freezeBalance: number;
-    totalBalance: number;
-    tocUsedBalance: number;
-    getCashImg: string;
+export interface YouNongPaiGrowthInfo {
+    growth: number;
+    allGrowth: number;
+    isSign: number;
+}
+export interface YouNongPaiGrowthLog {
+    growthId: number;
+    userId: number;
+    growthType: number;
+    typeName: string;
+    growthProp: number;
+    createTime: number;
+    dateYmd: string;
+    growth: number;
+    bizId: number;
+    userName: null | string;
+    headUrl: null | string;
+    phone: null | string;
+    growth1: null | number;
+    growth2: null | number;
+    beginTime: null | number;
+    endTime: null | number;
+    isSystem: null | number;
+
+}
+export interface YouNongPaiTask {
+    taskType: string;
+    taskName: string;
+    taskDes: string;
+    isFinish: number;
+    finishTimes: number;
+    allTimes: number;
+    growth: number;
+    maxGrowth: number;
 }
 export interface YouNongPai {
     user: YouNongPaiUser;
-    balance: YouNongPaiBalance;
-    logs: YouNongPaiLog[];
+    draw_info: YouNongPaiDrawInfo;
+    draw_logs: YouNongPaiDrawLog[];
+    growth_info: YouNongPaiGrowthInfo,
+    growth_logs: YouNongPaiGrowthLog[],
+    tasks: YouNongPaiTask[],
 }
 export default {
     searchor: () => axios.get<SearchorType[]>('/searchor'),
@@ -93,5 +131,6 @@ export default {
     noteContentCreate: (data: Partial<NoteContent>) => axios.post<NoteContent[]>(`/note/content`, data),
     noteContentUpdate: (id: number, data: Partial<NoteContent>) => axios.post<NoteContent[]>(`/note/content/${id}`, data),
     youNongPaiTokens: () => axios.get<YouNongPaiToken[]>('/you_nong_pai/tokens'),
-    youNongPai: (token: string) => axios.post<YouNongPai>('/you_nong_pai', {token}),
+    youNongPai: (token: string) => axios.post<YouNongPai>('/you_nong_pai', { token }),
+    youNongPaiTask: (token: string, name: string) => axios.post<YouNongPaiTask[]>('/you_nong_pai/task', { token, name }),
 }

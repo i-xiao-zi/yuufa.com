@@ -10,13 +10,12 @@ export default class YouNongPaiService {
   constructor(private readonly youNongPaiModelService: YouNongPaiModelService) {}
   async index(token) {
     return {
-      balance: await this.findUserBalance(token),
-      user: await this.findUserInfo(token),
-      logs: await this.findMoneyLogs(token),
-      draw: await this.startDraw(token),
-      index: await this.getDrawIndex(token),
-      free: await this.freeIndex(token),
-      view: await this.view(token)
+      user: await this.userInfo(token),
+      draw_info: await this.findUserBalance(token),
+      draw_logs: await this.findMoneyLogs(token),
+      growth_info: await this.growthInfo(token),
+      growth_logs: await this.growthLogs(token),
+      tasks: await this.growthTask(token),
     };
   }
   tokens() {
@@ -24,35 +23,39 @@ export default class YouNongPaiService {
   }
   async cron() {
     const ynps = await this.youNongPaiModelService.all()
-    for (const ynp of ynps) {
-      this.growthTask(ynp.token).then(async (tasks: {taskType: string, taskName: string, isFinish: number, finishTimes: number, allTimes: number, growth: number, maxGrowth}[]) => {
-        console.log(tasks)
-        for(const task of tasks) {
-          if (task.isFinish === 0) {
-            switch(task.taskType) {
-              case 'TASK_GET_BT': // 领取惠民补贴
-                await this.startDraw(ynp.token);
+    let res = {};
+    for (const {token, name} of ynps) {
+      const tasks = await this.growthTask(token);
+      for(const task of tasks) {
+        if (task.isFinish === 0) {
+          switch(task.taskType) {
+            case 'TASK_GET_BT': // 领取惠民补贴
+              res[name]['draw'] = await this.startDraw(token);
               break;
-              case 'TASK_SIGN': // 今日签到
-                await this.growthSignIn(ynp.token);
+            case 'TASK_SIGN': // 今日签到
+              res[name]['sign'] = await this.growthSignIn(token);
               break;
-              case 'TASK_SHARE':
-                for(let i=task.allTimes-task.finishTimes; i>0; i--) {
-                  await this.growthShareProduct(ynp.token);
-                }
+            case 'TASK_SHARE':// 分享助农好货
+              res[name]['share'] = await this.growthShareProduct(token);
               break;
-              case 'TASK_MALL':
-                for(let i=task.allTimes-task.finishTimes; i>0; i--) {
-                  await this.growthViewSign(ynp.token);
-                }
+            case 'TASK_MALL':// 逛逛助农商城得成长值
+              res[name]['view'] = await this.growthViewSign(token);
               break;
-            }
           }
-          
         }
-      }).catch(err => {
-        console.log(err)
-      })
+      }
+    }
+    return res;
+  }
+  async task(token: string, name: string) {
+    if(name == 'draw') {
+      return await this.startDraw(token);
+    } else if (name == 'view') {
+      return await this.view(token);
+    } else if (name == 'sign') {
+      return await this.growthSignIn(token);
+    } else if (name == 'share') {
+      return await this.growthShareProduct(token);
     }
   }
 
@@ -76,7 +79,7 @@ export default class YouNongPaiService {
   findUserBalance(token: string) {
     return this.fetch('/getCash/findUserBalance', {accessToken: token});
   }
-  findUserInfo(token: string) {
+  userInfo(token: string) {
     return this.fetch('/account/findUserInfo', {accessToken: token});
   }
   findMoneyLogs(token: string){
@@ -92,6 +95,12 @@ export default class YouNongPaiService {
   }
   freeIndex(token) {
     return this.fetch('/index/free/index', {accessToken: token});
+  }
+  // 成长信息
+  growthInfo(token) {
+    return this.fetch('/growth/findUserGrowthInfo', {
+      accessToken: token,
+    });
   }
   // 成长任务
   growthTask(token) {
@@ -118,7 +127,7 @@ export default class YouNongPaiService {
   growthViewSign(token: string) {
     return this.fetch('/growth/viewMallSign', {productMainId: 92, accessToken: token})
   }
-  // 签到
+  // 分享助农好货
   growthShareProduct(token) {
     return this.fetch('/growth/shareProductSign', {
       productMainId: 62,
@@ -138,6 +147,7 @@ export default class YouNongPaiService {
       const response = await fetch(`https://wcxapi.gxwcx.com/apiWxStore/v1.0/${uri}`, {method: 'POST', headers, body: qs.stringify(data)});
       if (response.ok) {
         const json = await response.json()
+        console.log(json);
         if (json.code == 1 || json.code == 0) {
           resolve(json.data)
         }

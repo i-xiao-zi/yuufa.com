@@ -31,8 +31,28 @@ export default function YouNongPaiInfo(props: Props) {
               <div className="w-full flex items-center">
                 <Avatar src={info?.user.header} size="lg" alt={info?.user.nickName} />
                 <span>{info?.user.nickName}</span>
-                <span>{info?.balance.balance}/{info?.balance.totalBalance}</span>
+                <span>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</span>
               </div>
+              <Button onClick={() => {
+                api.youNongPaiTask(props.token.value, 'view').then(data => {
+                  console.log(data)
+                })
+              }}>逛逛助农商城得成长值</Button>
+              <Button onClick={() => {
+                api.youNongPaiTask(props.token.value, 'share').then(data => {
+                  console.log(data)
+                })
+              }}>分享助农好货</Button>
+              <Button onClick={() => {
+                api.youNongPaiTask(props.token.value, 'draw').then(data => {
+                  console.log(data)
+                })
+              }}>领取惠民补贴</Button>
+              <Button onClick={() => {
+                api.youNongPaiTask(props.token.value, 'sign').then(data => {
+                  console.log(data)
+                })
+              }}>今日签到</Button>
             </div>
             <div>
               <Calendar
@@ -40,9 +60,9 @@ export default function YouNongPaiInfo(props: Props) {
                 locale={'zh-CN'}
                 getDayProps={(date) => {
                   const today = dayjs().isSame(date, 'day') ? 'bg-red-300/10!' : '';
-                  const log = _.find(info?.logs || [], log => dayjs.unix(log.createTime).isSame(date, 'day'));
+                  const draw_log = _.find(info?.draw_logs || [], log => dayjs.unix(log.createTime).isSame(date, 'day'));
 
-                  const draw = log ? 'relative before:content-["*"] before:absolute before:block before:w-full before:h-full': '';
+                  const draw = draw_log ? 'relative before:content-["*"] before:absolute before:block before:w-full before:h-full': '';
                   return {
                     className: `${today} ${draw} bg-blue-100/20!`
                   }

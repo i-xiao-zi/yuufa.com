@@ -33,10 +33,18 @@ export default class YouNongPaiController {
   }
 
   @ApiOperation({summary: '任务'})
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        token: {type: 'string', example: 'a72a89cd4a2e4b2cbcd60a6c5e894e8f'}
+      }
+    }
+  })
   @Public()
   @Post('task')
-  task() {
-
+  task(@Body("token") token: string, @Body("name") name: string) {
+    return this.youNongPaiService.task(token, name);
   }
 
   @ApiOperation({summary: '定时任务'})
