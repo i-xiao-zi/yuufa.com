@@ -29,7 +29,7 @@ export default function YouNongPaiInfo(props: Props) {
       {
         !!info && (
           <div className="flex max-md:flex-col">
-            <div className="w-[400] max-md:w-full">
+            <div className="w-[600] max-md:w-full">
               <div className="w-full flex items-center">
                 <Avatar src={info?.user.header} size="lg" alt={info?.user.nickName} />
                 <span>{info?.user.nickName}</span>
@@ -53,7 +53,7 @@ export default function YouNongPaiInfo(props: Props) {
                   <div>已用补贴</div>
                 </div>
               </div>
-              <List>
+              <List spacing={10} size="lg">
                 {info.tasks.map(task => (<List.Item 
                   key={task.taskName} 
                   classNames={{
@@ -72,85 +72,107 @@ export default function YouNongPaiInfo(props: Props) {
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button>去完成</Button></div>
+                        <div><Button size="xs" disabled>已完成</Button></div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='VERIFY_PROXY'>
-                        <div>
-                          <span>{task.taskName}</span>
-                          <span className="text-sm text-gray-500">{task.taskDes}</span>
-                        </div>
-                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                        <>
+                          <div>
+                            <span>{task.taskName}</span>
+                            <span className="text-sm text-gray-500">{task.taskDes}</span>
+                          </div>
+                          <div><Button size="xs" disabled>去完成</Button></div>
+                        </>
                       </Switch.Case>
                       <Switch.Case case='VERIFY_DIRECT'>
-                        <div>
-                          <span>{task.taskName}</span>
-                          <span className="text-sm text-gray-500">{task.taskDes}</span>
-                        </div>
-                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                        <>
+                          <div>
+                            <span>{task.taskName}</span>
+                            <span className="text-sm text-gray-500">{task.taskDes}</span>
+                          </div>
+                          <div><Button size="xs" disabled>去完成</Button></div>
+                        </>
                       </Switch.Case>
                       <Switch.Case case='VERIFY_COUNTY_SERV'>
+                        <>
                         <div>
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                        <div><Button size="xs" disabled>已完成</Button></div>
+                        </>
                       </Switch.Case>
                       <Switch.Case case='ZN_MILK_CONSUME'>
+                        <>
                         <div>
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                        <div><Button size="xs" disabled>已完成</Button></div>
+                        </>
                       </Switch.Case>
                       <Switch.Case case='ZN_PRODUCT_CONSUME'>
+                        <>
                         <div>
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                        <div><Button size="xs" disabled>已完成</Button></div>
+                        </>
                       </Switch.Case>
                       <Switch.Case case='TASK_SIGN'>
+                        <>
                         <div>
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                        <div><Button size="xs" disabled>已完成</Button></div>
+                        </>
                       </Switch.Case>
                       <Switch.Case case='TASK_MALL'>
+                        <>
                         <div>
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                        <div><Button size="xs" disabled>已完成</Button></div>
+                        </>
                       </Switch.Case>
                       <Switch.Case case='TASK_GET_BT'>
+                        <>
                         <div>
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                        <div><Button size="xs" disabled>已完成</Button></div>
+                        </>
                       </Switch.Case>
                       <Switch.Case case='TASK_SHARE'>
+                        <>
                         <div>
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                        <div><Button size="xs" disabled={!!task.isFinish}>已完成</Button></div>
+                        </>
                       </Switch.Case>
                       <Switch.Case case='TASK_INVITE'>
+                        <>
                         <div>
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                        <div><Button size="xs" disabled>已完成</Button></div>
+                        </>
                       </Switch.Case>
                       <Switch.Case case='TASK_ZN_HD'>
+                        <>
                         <div>
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                        <div><Button size="xs" disabled>去完成</Button></div>
+                        </>
                       </Switch.Case>
                     </Switch>
                 </List.Item>))}
