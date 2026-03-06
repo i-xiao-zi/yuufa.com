@@ -126,7 +126,7 @@ export default function YouNongPaiInfo(props: Props) {
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button size="xs" disabled>已完成</Button></div>
+                        <div><Button size="xs" disabled={!!task.isFinish}>{!!task.isFinish ? '已完成' : '去完成'}</Button></div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='TASK_MALL'>
@@ -135,7 +135,7 @@ export default function YouNongPaiInfo(props: Props) {
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button size="xs" disabled>已完成</Button></div>
+                        <div><Button size="xs" disabled={!!task.isFinish}>{!!task.isFinish ? '已完成' : '去完成'}</Button></div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='TASK_GET_BT'>
@@ -144,7 +144,7 @@ export default function YouNongPaiInfo(props: Props) {
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button size="xs" disabled>已完成</Button></div>
+                        <div><Button size="xs" disabled={!!task.isFinish}>{!!task.isFinish ? '已完成' : '去完成'}</Button></div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='TASK_SHARE'>
@@ -153,7 +153,7 @@ export default function YouNongPaiInfo(props: Props) {
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button size="xs" disabled={!!task.isFinish}>已完成</Button></div>
+                        <div><Button size="xs" disabled={!!task.isFinish}>{!!task.isFinish ? '已完成' : '去完成'}</Button></div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='TASK_INVITE'>
@@ -226,7 +226,7 @@ export default function YouNongPaiInfo(props: Props) {
                     <Popover.Dropdown>
                       <Table>
                         <Table.Tbody>
-                          {draw_logs.map(log => <Table.Tr className="bg-red-300/10!" key={log.createTime}>
+                          {draw_logs.map((log, index) => <Table.Tr className="bg-red-300/10!" key={index}>
                             <Table.Th>补贴</Table.Th>
                             <Table.Td>{log.des}</Table.Td>
                             <Table.Td>{log.amount}</Table.Td>
