@@ -1,12 +1,14 @@
 "use client";
 
 import React, {HTMLAttributes} from "react";
-import {Avatar, Button, Input, List, Popover, SegmentedControlItem, Table} from "@mantine/core";
+import {Avatar, Button, Input, List, Popover, SegmentedControlItem, Table, ThemeIcon} from "@mantine/core";
 import api, {YouNongPai} from "@/api";
 import dayjs from "dayjs";
 import 'dayjs/locale/zh-cn';
 import {Calendar} from "@mantine/dates";
 import _ from 'lodash';
+import { IconCircleCheck, IconCircleDashed } from "@tabler/icons-react";
+import Switch from "@/components/switch";
 
 interface Props extends HTMLAttributes<HTMLDivElement>{
   token: SegmentedControlItem;
@@ -33,6 +35,127 @@ export default function YouNongPaiInfo(props: Props) {
                 <span>{info?.user.nickName}</span>
                 <span>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</span>
               </div>
+              <div className="flex content-between">
+                <div className="w-full flex flex-col justify-center items-center">
+                  <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                  <div>已用补贴</div>
+                </div>
+                <div className="w-full flex flex-col items-center">
+                  <div>{info?.growth_info.growth}/{info?.growth_info.allGrowth}</div>
+                  <div>成长</div>
+                </div>
+                <div className="w-full flex flex-col items-center">
+                  <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                  <div>已用补贴</div>
+                </div>
+                <div className="w-full flex flex-col items-center">
+                  <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                  <div>已用补贴</div>
+                </div>
+              </div>
+              <List>
+                {info.tasks.map(task => (<List.Item 
+                  key={task.taskName} 
+                  classNames={{
+                    itemWrapper: 'w-full',
+                    itemLabel: 'w-full flex justify-between items-center'
+                  }}
+                  icon={
+                    <ThemeIcon color="blue" size={24} radius="xl">
+                      {task.isFinish ? <IconCircleCheck  size={16} /> : <IconCircleDashed size={16} />}
+                    </ThemeIcon>
+                  }>
+                    <Switch value={task.taskType}>
+                      <Switch.Case case='VERIFY_USER_REGISTER'>
+                        <>
+                        <div>
+                          <span>{task.taskName}</span>
+                          <span className="text-sm text-gray-500">{task.taskDes}</span>
+                        </div>
+                        <div><Button>去完成</Button></div>
+                        </>
+                      </Switch.Case>
+                      <Switch.Case case='VERIFY_PROXY'>
+                        <div>
+                          <span>{task.taskName}</span>
+                          <span className="text-sm text-gray-500">{task.taskDes}</span>
+                        </div>
+                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                      </Switch.Case>
+                      <Switch.Case case='VERIFY_DIRECT'>
+                        <div>
+                          <span>{task.taskName}</span>
+                          <span className="text-sm text-gray-500">{task.taskDes}</span>
+                        </div>
+                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                      </Switch.Case>
+                      <Switch.Case case='VERIFY_COUNTY_SERV'>
+                        <div>
+                          <span>{task.taskName}</span>
+                          <span className="text-sm text-gray-500">{task.taskDes}</span>
+                        </div>
+                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                      </Switch.Case>
+                      <Switch.Case case='ZN_MILK_CONSUME'>
+                        <div>
+                          <span>{task.taskName}</span>
+                          <span className="text-sm text-gray-500">{task.taskDes}</span>
+                        </div>
+                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                      </Switch.Case>
+                      <Switch.Case case='ZN_PRODUCT_CONSUME'>
+                        <div>
+                          <span>{task.taskName}</span>
+                          <span className="text-sm text-gray-500">{task.taskDes}</span>
+                        </div>
+                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                      </Switch.Case>
+                      <Switch.Case case='TASK_SIGN'>
+                        <div>
+                          <span>{task.taskName}</span>
+                          <span className="text-sm text-gray-500">{task.taskDes}</span>
+                        </div>
+                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                      </Switch.Case>
+                      <Switch.Case case='TASK_MALL'>
+                        <div>
+                          <span>{task.taskName}</span>
+                          <span className="text-sm text-gray-500">{task.taskDes}</span>
+                        </div>
+                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                      </Switch.Case>
+                      <Switch.Case case='TASK_GET_BT'>
+                        <div>
+                          <span>{task.taskName}</span>
+                          <span className="text-sm text-gray-500">{task.taskDes}</span>
+                        </div>
+                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                      </Switch.Case>
+                      <Switch.Case case='TASK_SHARE'>
+                        <div>
+                          <span>{task.taskName}</span>
+                          <span className="text-sm text-gray-500">{task.taskDes}</span>
+                        </div>
+                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                      </Switch.Case>
+                      <Switch.Case case='TASK_INVITE'>
+                        <div>
+                          <span>{task.taskName}</span>
+                          <span className="text-sm text-gray-500">{task.taskDes}</span>
+                        </div>
+                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                      </Switch.Case>
+                      <Switch.Case case='TASK_ZN_HD'>
+                        <div>
+                          <span>{task.taskName}</span>
+                          <span className="text-sm text-gray-500">{task.taskDes}</span>
+                        </div>
+                        <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                      </Switch.Case>
+                    </Switch>
+                </List.Item>))}
+                
+              </List>
               <Button onClick={() => {
                 api.youNongPaiTask(props.token.value, 'view').then(data => {
                   console.log(data)
