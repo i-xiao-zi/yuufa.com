@@ -2,6 +2,18 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "crons": [{
     "path": "/you_nong_pai/cron",
-    "schedule": "*/15 16 * * *"
+    "schedule": "0 16 * * *"
+  },{
+    "path": "/you_nong_pai/cron",
+    "schedule": "5 16 * * *"
+  },{
+    "path": "/you_nong_pai/cron",
+    "schedule": "15 16 * * *"
+  },{
+    "path": "/you_nong_pai/cron",
+    "schedule": "20 16 * * *"
+  },{
+    "path": "/you_nong_pai/cron",
+    "schedule": "25 16 * * *"
   }]
 }
