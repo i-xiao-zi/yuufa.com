@@ -15,6 +15,7 @@ import CronController from './controller/cron';
 import CronService from './service/cron';
 import YouNongPaiController from "./controller/you_nong_pai";
 import YouNongPaiService from "./service/you_nong_pai";
+import TvController from "./controller/tv";
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import YouNongPaiService from "./service/you_nong_pai";
     AppController,
     CronController,
     YouNongPaiController,
+    TvController,
     AuthController,
     NoteController,
     SearchorController

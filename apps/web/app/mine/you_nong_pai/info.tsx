@@ -77,53 +77,53 @@ export default function YouNongPaiInfo(props: Props) {
                       </Switch.Case>
                       <Switch.Case case='VERIFY_PROXY'>
                         <>
-                          <div>
+                          <div className="line-through">
                             <span>{task.taskName}</span>
                             <span className="text-sm text-gray-500">{task.taskDes}</span>
                           </div>
-                          <div><Button size="xs" disabled>去完成</Button></div>
+                          <div></div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='VERIFY_DIRECT'>
                         <>
-                          <div>
+                          <div className="line-through">
                             <span>{task.taskName}</span>
                             <span className="text-sm text-gray-500">{task.taskDes}</span>
                           </div>
-                          <div><Button size="xs" disabled>去完成</Button></div>
+                          <div></div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='VERIFY_COUNTY_SERV'>
                         <>
-                        <div>
+                        <div className="line-through">
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button size="xs" disabled>已完成</Button></div>
+                        <div></div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='ZN_MILK_CONSUME'>
                         <>
-                        <div>
+                        <div className="line-through">
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button size="xs" disabled>已完成</Button></div>
+                        <div></div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='ZN_PRODUCT_CONSUME'>
                         <>
-                        <div>
+                        <div className="line-through">
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button size="xs" disabled>已完成</Button></div>
+                        <div></div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='TASK_SIGN'>
                         <>
                         <div>
-                          <span>{task.taskName}</span>
+                          <span>{task.taskName} ({task.isFinish}/1)</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
                         <div><Button size="xs" disabled={!!task.isFinish}>{!!task.isFinish ? '已完成' : '去完成'}</Button></div>
@@ -132,7 +132,7 @@ export default function YouNongPaiInfo(props: Props) {
                       <Switch.Case case='TASK_MALL'>
                         <>
                         <div>
-                          <span>{task.taskName}</span>
+                          <span>{task.taskName} ({task.finishTimes}/{task.allTimes})</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
                         <div><Button size="xs" disabled={!!task.isFinish}>{!!task.isFinish ? '已完成' : '去完成'}</Button></div>
@@ -141,7 +141,7 @@ export default function YouNongPaiInfo(props: Props) {
                       <Switch.Case case='TASK_GET_BT'>
                         <>
                         <div>
-                          <span>{task.taskName}</span>
+                          <span>{task.taskName} ({task.isFinish}/1)</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
                         <div><Button size="xs" disabled={!!task.isFinish}>{!!task.isFinish ? '已完成' : '去完成'}</Button></div>
@@ -150,7 +150,7 @@ export default function YouNongPaiInfo(props: Props) {
                       <Switch.Case case='TASK_SHARE'>
                         <>
                         <div>
-                          <span>{task.taskName}</span>
+                          <span>{task.taskName} ({task.finishTimes}/{task.allTimes})</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
                         <div><Button size="xs" disabled={!!task.isFinish}>{!!task.isFinish ? '已完成' : '去完成'}</Button></div>
@@ -158,20 +158,20 @@ export default function YouNongPaiInfo(props: Props) {
                       </Switch.Case>
                       <Switch.Case case='TASK_INVITE'>
                         <>
-                        <div>
-                          <span>{task.taskName}</span>
+                        <div className="line-through">
+                          <span>{task.taskName} ({task.finishTimes}/{task.allTimes})</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button size="xs" disabled>已完成</Button></div>
+                        <div></div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='TASK_ZN_HD'>
                         <>
-                        <div>
+                        <div className="line-through">
                           <span>{task.taskName}</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button size="xs" disabled>去完成</Button></div>
+                        <div></div>
                         </>
                       </Switch.Case>
                     </Switch>

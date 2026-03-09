@@ -2,7 +2,11 @@ import {Injectable} from '@nestjs/common';
 import YouNongPaiModelService from "./you_nong_pai.model";
 import {instanceToPlain} from "class-transformer";
 import dayjs from "dayjs";
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import qs from 'qs';
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 @Injectable()
 export default class YouNongPaiService {
@@ -10,6 +14,7 @@ export default class YouNongPaiService {
   constructor(private readonly youNongPaiModelService: YouNongPaiModelService) {}
   async index(token) {
     return {
+      index: await this.freeIndex(token),
       user: await this.userInfo(token),
       draw_info: await this.findUserBalance(token),
       draw_logs: await this.findMoneyLogs(token),
@@ -88,7 +93,7 @@ export default class YouNongPaiService {
       page: 1,
       type: 1,
       startDay: '20260101',
-      endDay: dayjs().format('YYYYMMDD'),
+      endDay: dayjs().tz('Asia/Shanghai').format('YYYYMMDD'),
       pageSize: 1000,
       accessToken: token
     }
