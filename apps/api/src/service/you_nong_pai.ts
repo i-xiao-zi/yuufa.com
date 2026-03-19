@@ -45,7 +45,7 @@ export default class YouNongPaiService {
               // res[name]['share'] = await this.growthShareProduct(token);
               break;
             case 'TASK_MALL':// 逛逛助农商城得成长值
-              res[name]['view'] = await this.growthViewSign(token);
+              // res[name]['view'] = await this.growthViewSign(token);
               break;
           }
         }
