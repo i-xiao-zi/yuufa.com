@@ -36,16 +36,24 @@ export default class YouNongPaiService {
         if (task.isFinish === 0) {
           switch(task.taskType) {
             case 'TASK_GET_BT': // 领取惠民补贴
-              res[name]['draw'] = await this.startDraw(token);
+              try{
+                res[name]['draw'] = await this.startDraw(token);
+              }catch (e){}
               break;
             case 'TASK_SIGN': // 今日签到
-              res[name]['sign'] = await this.growthSignIn(token);
+              try{
+                res[name]['sign'] = await this.growthSignIn(token);
+              }catch (e){}
               break;
             case 'TASK_SHARE':// 分享助农好货
-              // res[name]['share'] = await this.growthShareProduct(token);
+              try{
+                res[name]['share'] = await this.growthShareProduct(token);
+              }catch (e){}
               break;
             case 'TASK_MALL':// 逛逛助农商城得成长值
-              // res[name]['view'] = await this.growthViewSign(token);
+              try{
+                res[name]['view'] = await this.growthViewSign(token);
+              }catch (e){}
               break;
           }
         }
@@ -57,7 +65,7 @@ export default class YouNongPaiService {
     if(name == 'draw') {
       return await this.startDraw(token);
     } else if (name == 'view') {
-      return await this.view(token);
+      return await this.growthViewSign(token);
     } else if (name == 'sign') {
       return await this.growthSignIn(token);
     } else if (name == 'share') {
@@ -70,9 +78,6 @@ export default class YouNongPaiService {
    */
   startDraw(token: string) {
     return this.fetch('/index/startDraw', {accessToken: token});
-  }
-  view(token: string) {
-    return this.fetch('/growth/viewMallSign', {productMainId: 92, accessToken: token})
   }
 
   /**
@@ -131,12 +136,12 @@ export default class YouNongPaiService {
   }
   // 浏览
   growthViewSign(token: string) {
-    return this.fetch('/growth/viewMallSign', {productMainId: 92, accessToken: token})
+    return this.fetch('/growth/viewMallSign', {productMainId: 47, accessToken: token})
   }
   // 分享助农好货
   growthShareProduct(token) {
     return this.fetch('/growth/shareProductSign', {
-      productMainId: 62,
+      productMainId: 47,
       accessToken: token,
     });
   }
