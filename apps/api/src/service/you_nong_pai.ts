@@ -136,12 +136,12 @@ export default class YouNongPaiService {
   }
   // 浏览
   growthViewSign(token: string) {
-    return this.fetch('/growth/viewMallSign', {productMainId: 47, accessToken: token})
+    return this.fetch('/growth/viewMallSign', {productMainId: 129, accessToken: token})
   }
   // 分享助农好货
   growthShareProduct(token) {
     return this.fetch('/growth/shareProductSign', {
-      productMainId: 47,
+      productMainId: 129,
       accessToken: token,
     });
   }
