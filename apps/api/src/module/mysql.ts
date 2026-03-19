@@ -15,6 +15,10 @@ import NoteCategory from '../entity/note_category';
 import NoteContent from '../entity/note_content';
 import YouNongPai from "../entity/you_nong_pai";
 import YouNongPaiModelService from "../service/you_nong_pai.model";
+import TvChannel from '../entity/tv_channel';
+import TvSchedule from '../entity/tv_schedule';
+import TvChannelModelService from '../service/tv_channel.model';
+import TvScheduleModelService from '../service/tv_schedule.model';
 
 @Module({
   imports: [
@@ -39,9 +43,9 @@ import YouNongPaiModelService from "../service/you_nong_pai.model";
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([User, Searchor, SearchorType, NoteCategory, NoteContent, YouNongPai]),
+    TypeOrmModule.forFeature([User, Searchor, SearchorType, NoteCategory, NoteContent, YouNongPai, TvChannel, TvSchedule]),
   ],
-  providers: [UserModelService, SearchorModelService, SearchorTypeModelService, NoteCategoryModelService, NoteContentModelService, YouNongPaiModelService],
-  exports: [UserModelService, SearchorModelService, SearchorTypeModelService, NoteCategoryModelService, NoteContentModelService, YouNongPaiModelService],
+  providers: [UserModelService, SearchorModelService, SearchorTypeModelService, NoteCategoryModelService, NoteContentModelService, YouNongPaiModelService, TvChannelModelService, TvScheduleModelService],
+  exports: [UserModelService, SearchorModelService, SearchorTypeModelService, NoteCategoryModelService, NoteContentModelService, YouNongPaiModelService, TvChannelModelService, TvScheduleModelService],
 })
 export default class MysqlModule {}

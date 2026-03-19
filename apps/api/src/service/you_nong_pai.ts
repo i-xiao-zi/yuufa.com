@@ -42,7 +42,7 @@ export default class YouNongPaiService {
               res[name]['sign'] = await this.growthSignIn(token);
               break;
             case 'TASK_SHARE':// 分享助农好货
-              res[name]['share'] = await this.growthShareProduct(token);
+              // res[name]['share'] = await this.growthShareProduct(token);
               break;
             case 'TASK_MALL':// 逛逛助农商城得成长值
               res[name]['view'] = await this.growthViewSign(token);
