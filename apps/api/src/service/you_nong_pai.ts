@@ -21,6 +21,8 @@ export default class YouNongPaiService {
       growth_info: await this.growthInfo(token),
       growth_logs: await this.growthLogs(token),
       tasks: await this.growthTask(token),
+      zhunong_info: await this.zhunongInfo(token),
+      zhunong_logs: await this.zhunongLog(token),
     };
   }
   tokens() {
@@ -31,7 +33,13 @@ export default class YouNongPaiService {
     let res = {};
     for (const {token, name} of ynps) {
       const tasks = await this.growthTask(token);
+      const zhunong_info = await this.zhunongInfo(token);
+      const products = zhunong_info.recommendProducts;
+      const  growth_info = await this.growthInfo(token);
       res[name] = {};
+      if(growth_info.isSign == 0){
+        res[name]['sign'] = await this.growthSignIn(token);
+      }
       for(const task of tasks) {
         if (task.isFinish === 0) {
           switch(task.taskType) {
@@ -40,19 +48,14 @@ export default class YouNongPaiService {
                 res[name]['draw'] = await this.startDraw(token);
               }catch (e){}
               break;
-            case 'TASK_SIGN': // 今日签到
-              try{
-                res[name]['sign'] = await this.growthSignIn(token);
-              }catch (e){}
-              break;
             case 'TASK_SHARE':// 分享助农好货
               try{
-                res[name]['share'] = await this.growthShareProduct(token);
+                res[name]['share'] = await this.growthShareProduct(token, products[0].productMainId);
               }catch (e){}
               break;
             case 'TASK_MALL':// 逛逛助农商城得成长值
               try{
-                res[name]['view'] = await this.growthViewSign(token);
+                res[name]['view'] = await this.growthViewSign(token, products[1].productMainId);
               }catch (e){}
               break;
           }
@@ -62,14 +65,16 @@ export default class YouNongPaiService {
     return res;
   }
   async task(token: string, name: string) {
+    const zhunong_info = await this.zhunongInfo(token);
+    const products = zhunong_info.recommendProducts;
     if(name == 'draw') {
       return await this.startDraw(token);
     } else if (name == 'view') {
-      return await this.growthViewSign(token);
+      return await this.growthViewSign(token, products[1].productMainId);
     } else if (name == 'sign') {
       return await this.growthSignIn(token);
     } else if (name == 'share') {
-      return await this.growthShareProduct(token);
+      return await this.growthShareProduct(token, products[0].productMainId);
     }
   }
 
@@ -78,6 +83,20 @@ export default class YouNongPaiService {
    */
   startDraw(token: string) {
     return this.fetch('/index/startDraw', {accessToken: token});
+  }
+
+  zhunongLog(token: string) {
+    let data = {
+      page: 1,
+      type: 1,
+      pageSize: 1000,
+      accessToken: token
+    }
+    return this.fetch('/userIntegral/findUserZnPoiontLogs', data);
+  }
+
+  zhunongInfo(token: string) {
+    return this.fetch('/userIntegral/free/findZnIndex', {accessToken: token});
   }
 
   /**
@@ -135,13 +154,13 @@ export default class YouNongPaiService {
     });
   }
   // 浏览
-  growthViewSign(token: string) {
-    return this.fetch('/growth/viewMallSign', {productMainId: 129, accessToken: token})
+  growthViewSign(token: string, id) {
+    return this.fetch('/growth/viewMallSign', {productMainId: id, accessToken: token})
   }
   // 分享助农好货
-  growthShareProduct(token) {
+  growthShareProduct(token, id) {
     return this.fetch('/growth/shareProductSign', {
-      productMainId: 129,
+      productMainId: id,
       accessToken: token,
     });
   }
@@ -155,7 +174,8 @@ export default class YouNongPaiService {
         'Content-Type': 'application/x-www-form-urlencoded',
         accessToken: data?.accessToken
       }
-      const response = await fetch(`https://wcxapi.gxwcx.com/apiWxStore/v1.0/${uri}`, {method: 'POST', headers, body: qs.stringify(data)});
+      // const response = await fetch(`https://wcxapi.gxwcx.com/apiWxStore/v1.0/${uri}`, {method: 'POST', headers, body: qs.stringify(data)});
+      const response = await fetch(`https://wcxapi.gxwcx.com/apiWxStore/v2/${uri}`, {method: 'POST', headers, body: qs.stringify(data)});
       if (response.ok) {
         const json = await response.json()
         console.log(json);
