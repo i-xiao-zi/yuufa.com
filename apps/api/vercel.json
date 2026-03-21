@@ -2,24 +2,18 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "crons": [{
     "path": "/you_nong_pai/cron",
+    "schedule": "10 16 * * *"
+  },{
+    "path": "/you_nong_pai/cron",
+    "schedule": "20 16 * * *"
+  },{
+    "path": "/you_nong_pai/cron",
+    "schedule": "30 16 * * *"
+  },{
+    "path": "/you_nong_pai/cron",
+    "schedule": "40 16 * * *"
+  },{
+    "path": "/you_nong_pai/cron",
     "schedule": "50 16 * * *"
-  },{
-    "path": "/you_nong_pai/cron",
-    "schedule": "51 16 * * *"
-  },{
-    "path": "/you_nong_pai/cron",
-    "schedule": "52 16 * * *"
-  },{
-    "path": "/you_nong_pai/cron",
-    "schedule": "53 16 * * *"
-  },{
-    "path": "/you_nong_pai/cron",
-    "schedule": "54 16 * * *"
-  },{
-    "path": "/you_nong_pai/cron",
-    "schedule": "55 16 * * *"
-  },{
-    "path": "/you_nong_pai/cron",
-    "schedule": "* 16 * * *"
   }]
 }
