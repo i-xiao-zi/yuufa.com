@@ -45,12 +45,8 @@ export default function YouNongPaiInfo(props: Props) {
                   <div>成长</div>
                 </div>
                 <div className="w-full flex flex-col items-center">
-                  <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
-                  <div>已用补贴</div>
-                </div>
-                <div className="w-full flex flex-col items-center">
-                  <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
-                  <div>已用补贴</div>
+                  <div>{info?.zhunong_info.znPoint - info?.zhunong_info.znUsedPoint}/{info?.zhunong_info.znPoint}</div>
+                  <div>助农金</div>
                 </div>
               </div>
               <List spacing={10} size="lg">
@@ -123,10 +119,12 @@ export default function YouNongPaiInfo(props: Props) {
                       <Switch.Case case='TASK_SIGN'>
                         <>
                         <div>
-                          <span>{task.taskName} ({task.isFinish}/1)</span>
+                          <span>{task.taskName} ({info.growth_info.isSign}/1)</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button size="xs" disabled={!!task.isFinish}>{!!task.isFinish ? '已完成' : '去完成'}</Button></div>
+                        <div>
+                          <Button size="xs" disabled={!!info.growth_info.isSign}  onClick={() => api.youNongPaiTask(props.token.value, 'sign')}>{!!info.growth_info.isSign ? '已完成' : '去完成'}</Button>
+                        </div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='TASK_MALL'>
@@ -135,7 +133,9 @@ export default function YouNongPaiInfo(props: Props) {
                           <span>{task.taskName} ({task.finishTimes}/{task.allTimes})</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button size="xs" disabled={!!task.isFinish}>{!!task.isFinish ? '已完成' : '去完成'}</Button></div>
+                        <div>
+                          <Button size="xs" disabled={!!task.isFinish} onClick={() => api.youNongPaiTask(props.token.value, 'view')}>{!!task.isFinish ? '已完成' : '去完成'}</Button>
+                        </div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='TASK_GET_BT'>
@@ -144,7 +144,9 @@ export default function YouNongPaiInfo(props: Props) {
                           <span>{task.taskName} ({task.isFinish}/1)</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button size="xs" disabled={!!task.isFinish}>{!!task.isFinish ? '已完成' : '去完成'}</Button></div>
+                        <div>
+                          <Button size="xs" disabled={!!task.isFinish}  onClick={() => api.youNongPaiTask(props.token.value, 'sign')}>{!!task.isFinish ? '已完成' : '去完成'}</Button>
+                        </div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='TASK_SHARE'>
@@ -153,7 +155,9 @@ export default function YouNongPaiInfo(props: Props) {
                           <span>{task.taskName} ({task.finishTimes}/{task.allTimes})</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
-                        <div><Button size="xs" disabled={!!task.isFinish}>{!!task.isFinish ? '已完成' : '去完成'}</Button></div>
+                        <div>
+                          <Button size="xs" disabled={!!task.isFinish}  onClick={() => api.youNongPaiTask(props.token.value, 'share')}>{!!task.isFinish ? '已完成' : '去完成'}</Button>
+                        </div>
                         </>
                       </Switch.Case>
                       <Switch.Case case='TASK_INVITE'>
@@ -176,28 +180,7 @@ export default function YouNongPaiInfo(props: Props) {
                       </Switch.Case>
                     </Switch>
                 </List.Item>))}
-                
               </List>
-              <Button onClick={() => {
-                api.youNongPaiTask(props.token.value, 'view').then(data => {
-                  console.log(data)
-                })
-              }}>逛逛助农商城得成长值</Button>
-              <Button onClick={() => {
-                api.youNongPaiTask(props.token.value, 'share').then(data => {
-                  console.log(data)
-                })
-              }}>分享助农好货</Button>
-              <Button onClick={() => {
-                api.youNongPaiTask(props.token.value, 'draw').then(data => {
-                  console.log(data)
-                })
-              }}>领取惠民补贴</Button>
-              <Button onClick={() => {
-                api.youNongPaiTask(props.token.value, 'sign').then(data => {
-                  console.log(data)
-                })
-              }}>今日签到</Button>
             </div>
             <div className="flex-auto max-md:w-full">
               <Calendar

@@ -123,6 +123,8 @@ export interface YouNongPai {
     growth_info: YouNongPaiGrowthInfo,
     growth_logs: YouNongPaiGrowthLog[],
     tasks: YouNongPaiTask[],
+    zhunong_info: any,
+    zhunong_logs: any[],
 }
 export default {
     searchor: () => axios.get<SearchorType[]>('/searchor'),
