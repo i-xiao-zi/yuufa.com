@@ -166,7 +166,7 @@ export default class YouNongPaiService {
   }
 
   private fetch(uri: string, data: {[key: string]: any}) {
-    return new Promise<any>(async (_, reject) => {
+    return new Promise<any>(async (resolve, reject) => {
       const headers = {
         'o': 'oUe5g7FGLV9frAZ_uYKandx_5V80',
         'apiFrom': 'WXMA',
@@ -176,8 +176,11 @@ export default class YouNongPaiService {
       }
       // const response = await fetch(`https://wcxapi.gxwcx.com/apiWxStore/v1.0/${uri}`, {method: 'POST', headers, body: qs.stringify(data)});
       const response = await fetch(`https://wcxapi.gxwcx.com/apiWxStore/v2/${uri}`, {method: 'POST', headers, body: qs.stringify(data)});
-      const json = await response.json()
-      reject(json)
+      if (response.ok) {
+        const json = await response.json()
+        resolve(json.data)
+      }
+      resolve({})
     })
   }
 }
