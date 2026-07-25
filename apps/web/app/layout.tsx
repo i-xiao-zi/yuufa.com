@@ -41,7 +41,6 @@ export default function Layout({children}: React.PropsWithChildren){
                         <Menu.Item component="a" href="/mine/you_nong_pai">优农派</Menu.Item>
                       </Menu.Dropdown>
                     </Menu>
-                    <NavLink href="/television" label="电视节目" active={pathname.startsWith("/television")} variant="filled" />
                     <NavLink href="/video" label="影视" active={pathname.startsWith("/video")} variant="filled" />
                   </div>
                   <div className="flex-auto"></div>
