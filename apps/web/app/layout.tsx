@@ -38,10 +38,9 @@ export default function Layout({children}: React.PropsWithChildren){
                         <NavLink label="我的" className="hidden" active={pathname.startsWith("/mine")} variant="filled" />
                       </Menu.Target>
                       <Menu.Dropdown>
-                        <Menu.Item component="a" href="/mine/you_nong_pai">优农派</Menu.Item>
+                        <Menu.Item component="a" href="/you_nong_pai">优农派</Menu.Item>
                       </Menu.Dropdown>
                     </Menu>
-                    <NavLink href="/video" label="影视" active={pathname.startsWith("/video")} variant="filled" />
                   </div>
                   <div className="flex-auto"></div>
                   <div className="flex items-center">
