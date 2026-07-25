@@ -9,4 +9,5 @@ export default {
       destination: `${config.base_api}/searchor`
     }
   ],
+  staticPageGenerationTimeout: 3000,
 } satisfies NextConfig;

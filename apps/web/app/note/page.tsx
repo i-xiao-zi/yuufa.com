@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 };
 export default async function NotePage() {
   const tree = await api.note();
+  // const tree = {data: [], code: 0, message: ''};
   const parseTree = (data: NoteCategory[]): TreeNodeData[] => data.map(item => ({
       label: item.name,
       value: item.name,
