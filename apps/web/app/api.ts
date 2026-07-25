@@ -1,4 +1,6 @@
 import axios from "@/axios";
+import * as http from "@/http";
+import { Paginate, Video, VideoOrigin } from "./api.t";
 
 
 export interface Searchor {
@@ -118,21 +120,36 @@ export interface YouNongPaiTask {
 }
 export interface YouNongPai {
     user: YouNongPaiUser;
-    draw_info: YouNongPaiDrawInfo;
-    draw_logs: YouNongPaiDrawLog[];
-    growth_info: YouNongPaiGrowthInfo,
-    growth_logs: YouNongPaiGrowthLog[],
     tasks: YouNongPaiTask[],
-    zhunong_info: any,
-    zhunong_logs: any[],
 }
+
+export interface YouNongPaiDraw {
+    info: YouNongPaiDrawInfo;
+    logs: YouNongPaiDrawLog[];
+}
+export interface YouNongPaiGrowth {
+    info: YouNongPaiGrowthInfo,
+    logs: YouNongPaiGrowthLog[],
+}
+export interface YouNongPaiZhunong {
+    info: any,
+    logs: any[],
+}
+
 export default {
-    searchor: () => axios.get<SearchorType[]>('/searchor'),
+    searchor: () => http.get<SearchorType[]>('/searchor'),
     note: () => axios.get<NoteCategory[]>('/note'),
     noteContent: (id: number) => axios.get<NoteContent>(`/note/content/${id}`),
     noteContentCreate: (data: Partial<NoteContent>) => axios.post<NoteContent[]>(`/note/content`, data),
     noteContentUpdate: (id: number, data: Partial<NoteContent>) => axios.post<NoteContent[]>(`/note/content/${id}`, data),
     youNongPaiTokens: () => axios.get<YouNongPaiToken[]>('/you_nong_pai/tokens'),
     youNongPai: (token: string) => axios.post<YouNongPai>('/you_nong_pai', { token }),
-    youNongPaiTask: (token: string, name: string) => axios.post<YouNongPaiTask[]>('/you_nong_pai/task', { token, name }),
+    youNongPaiDraw: (token: string) => axios.get<YouNongPaiDraw>(`/you_nong_pai/draw?token=${token}`),
+    youNongPaiGrowth: (token: string) => axios.get<YouNongPaiGrowth>(`/you_nong_pai/growth?token=${token}`),
+    youNongPaiZhunong: (token: string) => axios.get<YouNongPaiZhunong>(`/you_nong_pai/zhunong?token=${token}`),
+    youNongPaiTask: (token: string, name: string) => http.post<YouNongPaiTask[]>('/you_nong_pai/task', { token, name }),
+    videoOrigin: () => http.get<VideoOrigin[]>('/video/origin'),
+    videoOriginDetail: (id: number) => http.get<VideoOrigin>(`/video/origin/${id}`),
+    videoList: ({video_name, origin_id, page, size}: {video_name?:string, origin_id?: number, page?: number, size?: number}) => http.get<Paginate<Video[]>>(`/video?video_name=${video_name || ''}&origin_id=${origin_id || ''}&page=${page || ''}&size=${size || ''}`),
+    videoDetail: (id: number) => http.get<Video>(`/video/video/${id}`),
 }

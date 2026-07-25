@@ -3,7 +3,7 @@
 import React from "react";
 import {Input, SegmentedControl, SegmentedControlItem} from "@mantine/core";
 import api from "@/api";
-import YouNongPaiInfo from "@/mine/you_nong_pai/info";
+import YouNongPaiInfo from "@/you_nong_pai/info";
 
 
 export default function YouNongPaiToken() {

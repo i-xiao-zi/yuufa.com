@@ -2,7 +2,7 @@
 
 import React, {HTMLAttributes} from "react";
 import {Avatar, Button, Input, List, Popover, SegmentedControlItem, Table, ThemeIcon} from "@mantine/core";
-import api, {YouNongPai} from "@/api";
+import api, {YouNongPai, YouNongPaiDraw, YouNongPaiGrowth, YouNongPaiZhunong} from "@/api";
 import dayjs from "dayjs";
 import 'dayjs/locale/zh-cn';
 import {Calendar} from "@mantine/dates";
@@ -17,14 +17,27 @@ interface Props extends HTMLAttributes<HTMLDivElement>{
 
 export default function YouNongPaiInfo(props: Props) {
   const [info, setInfo] = React.useState<YouNongPai|undefined>(undefined);
+  const [draw, setDraw] = React.useState<YouNongPaiDraw|undefined>(undefined);
+  const [growth, setGrowth] = React.useState<YouNongPaiGrowth|undefined>(undefined);
+  const [zhunong, setZhunong] = React.useState<YouNongPaiZhunong|undefined>(undefined);
+  const input = React.useRef<HTMLInputElement>(null);
   React.useEffect(() => {
-    api.youNongPai(props.token.value).then(data => setInfo(data.data))
-  }, [props.token])
+    api.youNongPai(props.token.value).then(data => setInfo(data.data));
+    api.youNongPaiDraw(props.token.value).then(data=>setDraw(data.data));
+    api.youNongPaiGrowth(props.token.value).then(data=>setGrowth(data.data));
+    api.youNongPaiZhunong(props.token.value).then(data=>setZhunong(data.data));
+  }, [props.token]);
+  const change = (e: React.ChangeEvent<HTMLInputElement>) => {
+    props.token.value = e.target.value;
+  }
+  const edit = () => {
+    console.log(input.current?.value);
+  }
   return (
     <div className={`${props.className || ''} ${props.active ? '' : 'hidden'}`}>
       <div className="flex mb-5">
-        <Input className="flex-auto" value={props.token.value} onChange={() => {}} />
-        <Button>修改</Button>
+        <Input className="flex-auto" ref={input} value={props.token.value} onChange={change} />
+        <Button onClick={edit}>修改</Button>
       </div>
       {
         !!info && (
@@ -33,19 +46,19 @@ export default function YouNongPaiInfo(props: Props) {
               <div className="w-full flex items-center">
                 <Avatar src={info?.user.header} size="lg" alt={info?.user.nickName} />
                 <span>{info?.user.nickName}</span>
-                <span>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</span>
+                <span>{draw?.info.balance}/{draw?.info.totalBalance}</span>
               </div>
               <div className="flex content-between">
                 <div className="w-full flex flex-col justify-center items-center">
-                  <div>{info?.draw_info.balance}/{info?.draw_info.totalBalance}</div>
+                  <div>{draw?.info.balance}/{draw?.info.totalBalance}</div>
                   <div>已用补贴</div>
                 </div>
                 <div className="w-full flex flex-col items-center">
-                  <div>{info?.growth_info.growth}/{info?.growth_info.allGrowth}</div>
+                  <div>{growth?.info.growth}/{growth?.info.allGrowth}</div>
                   <div>成长</div>
                 </div>
                 <div className="w-full flex flex-col items-center">
-                  <div>{info?.zhunong_info.znPoint - info?.zhunong_info.znUsedPoint}/{info?.zhunong_info.znPoint}</div>
+                  <div>{zhunong?.info.znPoint - zhunong?.info.znUsedPoint}/{zhunong?.info.znPoint}</div>
                   <div>助农金</div>
                 </div>
               </div>
@@ -119,11 +132,11 @@ export default function YouNongPaiInfo(props: Props) {
                       <Switch.Case case='TASK_SIGN'>
                         <>
                         <div>
-                          <span>{task.taskName} ({info.growth_info.isSign}/1)</span>
+                          <span>{task.taskName} ({growth?.info.isSign}/1)</span>
                           <span className="text-sm text-gray-500">{task.taskDes}</span>
                         </div>
                         <div>
-                          <Button size="xs" disabled={!!info.growth_info.isSign}  onClick={() => api.youNongPaiTask(props.token.value, 'sign')}>{!!info.growth_info.isSign ? '已完成' : '去完成'}</Button>
+                          <Button size="xs" disabled={!!growth?.info.isSign}  onClick={() => api.youNongPaiTask(props.token.value, 'sign')}>{!!growth?.info.isSign ? '已完成' : '去完成'}</Button>
                         </div>
                         </>
                       </Switch.Case>
@@ -188,18 +201,18 @@ export default function YouNongPaiInfo(props: Props) {
                 locale={'zh-CN'}
                 getDayProps={(date) => {
                   const today = dayjs().isSame(date, 'day') ? 'bg-red-300/10!' : '';
-                  const draw_log = _.find(info?.draw_logs || [], log => dayjs.unix(log.createTime).isSame(date, 'day'));
+                  const draw_log = _.find(draw?.logs || [], log => dayjs.unix(log.createTime).isSame(date, 'day'));
 
-                  const draw = draw_log ? 'relative before:content-["*"] before:absolute before:block before:w-full before:h-full before:-z-1': '';
+                  const draw_day = draw_log ? 'relative before:content-["*"] before:absolute before:block before:w-full before:h-full before:-z-1': '';
                   return {
-                    className: `${today} ${draw} bg-blue-100/20!`
+                    className: `${today} ${draw_day} bg-blue-100/20!`
                   }
 
                 }}
                 renderDay={(date) => {
                   const day = dayjs(date).date();
-                  const draw_logs = (info?.draw_logs || []).filter(log => dayjs.unix(log.createTime).isSame(date, 'day')).sort((a, b) => a.createTime - b.createTime);
-                  const growth_logs = (info?.growth_logs || []).filter(log => dayjs.unix(log.createTime).isSame(date, 'day')).sort((a, b) => a.createTime - b.createTime);
+                  const draw_logs = (draw?.logs || []).filter(log => dayjs.unix(log.createTime).isSame(date, 'day')).sort((a, b) => a.createTime - b.createTime);
+                  const growth_logs = (growth?.logs || []).filter(log => dayjs.unix(log.createTime).isSame(date, 'day')).sort((a, b) => a.createTime - b.createTime);
                   return draw_logs.length + growth_logs.length === 0 
                   ? (<div className="w-full h-full flex items-center justify-center">{day}</div>)
                   : (<Popover width={400} trapFocus withArrow shadow="md">

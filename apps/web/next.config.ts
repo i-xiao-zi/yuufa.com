@@ -1,14 +1,12 @@
 import config from "@/config";
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+export default {
   /* config options here */
   rewrites: async () => [
     {
       source: '/searchor',
       destination: `${config.base_api}/searchor`
     }
-  ]
-};
-
-export default nextConfig;
+  ],
+} satisfies NextConfig;

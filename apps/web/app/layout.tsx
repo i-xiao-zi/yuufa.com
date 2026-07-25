@@ -32,14 +32,17 @@ export default function Layout({children}: React.PropsWithChildren){
                   <div className="flex items-center whitespace-nowrap">
                     <NavLink href="/" label="首页" active={pathname == "/"} variant="filled" />
                     <NavLink href="/note" label="Note" active={pathname.startsWith("/note")} variant="filled" />
+                    <NavLink href="/you_nong_pai" label="优农派" active={pathname.startsWith("/you_nong_pai")} variant="filled" />
                     <Menu shadow="md" width={200}>
                       <Menu.Target>
-                        <NavLink label="我的" active={pathname.startsWith("/mine")} variant="filled" />
+                        <NavLink label="我的" className="hidden" active={pathname.startsWith("/mine")} variant="filled" />
                       </Menu.Target>
                       <Menu.Dropdown>
                         <Menu.Item component="a" href="/mine/you_nong_pai">优农派</Menu.Item>
                       </Menu.Dropdown>
                     </Menu>
+                    <NavLink href="/television" label="电视节目" active={pathname.startsWith("/television")} variant="filled" />
+                    <NavLink href="/video" label="影视" active={pathname.startsWith("/video")} variant="filled" />
                   </div>
                   <div className="flex-auto"></div>
                   <div className="flex items-center">

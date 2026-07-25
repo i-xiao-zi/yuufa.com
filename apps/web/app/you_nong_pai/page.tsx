@@ -1,7 +1,4 @@
 import {Metadata} from "next";
-import {List, ListItem, SegmentedControl} from '@mantine/core';
-import { Calendar } from '@mantine/dates';
-import React from "react";
 import YouNongPaiToken from "./token";
 
 
