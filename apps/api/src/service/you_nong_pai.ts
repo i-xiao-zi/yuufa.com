@@ -16,17 +16,35 @@ export default class YouNongPaiService {
     return {
       index: await this.freeIndex(token),
       user: await this.userInfo(token),
-      draw_info: await this.findUserBalance(token),
-      draw_logs: await this.findMoneyLogs(token),
-      growth_info: await this.growthInfo(token),
-      growth_logs: await this.growthLogs(token),
+      // draw_info: await this.findUserBalance(token),
+      // draw_logs: await this.findMoneyLogs(token),
+      // growth_info: await this.growthInfo(token),
+      // growth_logs: await this.growthLogs(token),
       tasks: await this.growthTask(token),
-      zhunong_info: await this.zhunongInfo(token),
-      zhunong_logs: await this.zhunongLog(token),
+      // zhunong_info: await this.zhunongInfo(token),
+      // zhunong_logs: await this.zhunongLog(token),
     };
   }
   tokens() {
     return instanceToPlain(this.youNongPaiModelService.all());
+  }
+  async draw(token){
+    return {
+      info: await this.findUserBalance(token),
+      logs: await this.findMoneyLogs(token),
+    }
+  }
+  async growth(token){
+    return {
+      info: await this.growthInfo(token),
+      logs: await this.growthLogs(token),
+    }
+  }
+  async zhunong(token){
+    return {
+      info: await this.zhunongInfo(token),
+      logs: await this.zhunongLog(token),
+    }
   }
   async cron() {
     const ynps = await this.youNongPaiModelService.all()

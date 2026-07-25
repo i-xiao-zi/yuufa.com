@@ -40,4 +40,22 @@ export default class TvController {
   async henan() {
     return this.tvService.henan();
   }
+  @Json(false)
+  @Get('dianshi')
+  @Public()
+  async dianshi() {
+    return this.tvService.dianshi();
+  }
+  @Get('video')
+  @Public()
+  async video() {
+    return this.tvService.video();
+  }
+
+  @Get('video/origin')
+  @Public()
+  async videoOrigin() {
+    return this.tvService.videoOrigin();
+  }
+
 }

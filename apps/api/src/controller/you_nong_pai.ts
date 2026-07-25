@@ -25,6 +25,27 @@ export default class YouNongPaiController {
     return this.youNongPaiService.index(token);
   }
 
+  @ApiOperation({summary: "签到"})
+  @Public()
+  @Get('draw')
+  draw(@Query('token') token: string) {
+    return this.youNongPaiService.draw(token);
+  }
+
+  @ApiOperation({summary: "成长"})
+  @Public()
+  @Get('growth')
+  growth(@Query('token') token: string) {
+    return this.youNongPaiService.growth(token);
+  }
+  
+  @ApiOperation({summary: "助农"})
+  @Public()
+  @Get('zhunong')
+  zhunong(@Query('token') token: string) {
+    return this.youNongPaiService.zhunong(token);
+  }
+
   @ApiOperation({summary: "token列表"})
   @Public()
   @Get('tokens')
