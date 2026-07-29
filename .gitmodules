@@ -1,2 +1,4 @@
+[submodule "apps/api"]
+	url = git@github.com:i-xiao-zi/api.yuufa.com.git
 [submodule "apps/television"]
 	url = git@github.com:i-xiao-zi/television.api.yuufa.com.git
