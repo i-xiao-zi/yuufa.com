@@ -1,6 +1,6 @@
 [submodule "apps/api"]
 	url = git@github.com:i-xiao-zi/api.yuufa.com.git
+[submodule "apps/www"]
+	url = git@github.com:i-xiao-zi/www.yuufa.com.git
 [submodule "apps/television"]
 	url = git@github.com:i-xiao-zi/television.api.yuufa.com.git
-[submodule "apps/www"]
-	url = https://github.com/i-xiao-zi/www.yuufa.com.git
