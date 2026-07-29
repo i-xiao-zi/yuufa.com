@@ -15,20 +15,6 @@ import NoteCategory from '../entity/note_category';
 import NoteContent from '../entity/note_content';
 import YouNongPai from "../entity/you_nong_pai";
 import YouNongPaiModelService from "../service/you_nong_pai.model";
-import TvChannel from '../entity/tv_channel';
-import TvSchedule from '../entity/tv_schedule';
-import TvChannelModelService from '../service/tv_channel.model';
-import TvScheduleModelService from '../service/tv_schedule.model';
-import VideoOriginModelService from '../service/video_origin.model';
-import Video from "../entity/video";
-import VideoOrigin from '../entity/video_origin';
-import VideoArea from "../entity/video_area";
-import VideoUrl from "../entity/video_url";
-import VideoTag from "../entity/video_tag";
-import VideoLog from '../entity/video_log';
-import VideoModelService from "../service/video.model";
-import VideoUrlModelService from "../service/video_url.model";
-import VideoLogModelService from '../service/video_log.model';
 
 @Module({
   imports: [
@@ -60,14 +46,6 @@ import VideoLogModelService from '../service/video_log.model';
       NoteCategory, 
       NoteContent, 
       YouNongPai, 
-      TvChannel, 
-      TvSchedule, 
-      VideoOrigin,
-      VideoArea,
-      Video,
-      VideoUrl,
-      VideoTag,
-      VideoLog,
     ]),
   ],
   providers: [
@@ -77,12 +55,6 @@ import VideoLogModelService from '../service/video_log.model';
     NoteCategoryModelService, 
     NoteContentModelService, 
     YouNongPaiModelService, 
-    TvChannelModelService, 
-    TvScheduleModelService,
-    VideoOriginModelService,
-    VideoModelService,
-    VideoUrlModelService,
-    VideoLogModelService,
   ],
   exports: [
     UserModelService, 
@@ -91,12 +63,6 @@ import VideoLogModelService from '../service/video_log.model';
     NoteCategoryModelService, 
     NoteContentModelService, 
     YouNongPaiModelService, 
-    TvChannelModelService, 
-    TvScheduleModelService,
-    VideoOriginModelService,
-    VideoModelService,
-    VideoUrlModelService,
-    VideoLogModelService,
   ],
 })
 export default class MysqlModule {}

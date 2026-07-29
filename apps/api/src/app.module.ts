@@ -15,14 +15,8 @@ import CronController from './controller/cron';
 import CronService from './service/cron';
 import YouNongPaiController from "./controller/you_nong_pai";
 import YouNongPaiService from "./service/you_nong_pai";
-import TvController from "./controller/tv";
-import TvService from './service/tv';
-import KekeTvTvService from "./service/keke.tv";
 import ControllerModule from './module/controller';
 import { ScheduleModule } from '@nestjs/schedule';
-import TaskService from './service/task';
-import VideoController from './controller/video';
-import VideoService from './service/video';
 
 @Module({
   imports: [
@@ -37,8 +31,6 @@ import VideoService from './service/video';
     AppController,
     CronController,
     YouNongPaiController,
-    TvController,
-    VideoController,
     AuthController,
     NoteController,
     SearchorController
@@ -46,11 +38,7 @@ import VideoService from './service/video';
   providers: [
     AppService,
     CronService,
-    TaskService,
     YouNongPaiService,
-    TvService,
-    VideoService,
-    KekeTvTvService,
     AuthService,
     NoteService,
     SearchorService,

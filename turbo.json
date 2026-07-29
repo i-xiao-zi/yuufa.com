@@ -24,6 +24,10 @@
       "env": ["NODE_ENV"],
       "outputs": ["dist/**", ".out/**", "public/**"]
     },
+    "television": {
+      "env": ["NODE_ENV"],
+      "outputs": ["dist/**", ".out/**", "public/**"]
+    },
     "lint": {},
     "dev": {
       "cache": true,

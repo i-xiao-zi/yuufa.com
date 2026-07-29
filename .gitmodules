@@ -1,0 +1,2 @@
+[submodule "apps/television"]
+	url = git@github.com:i-xiao-zi/television.api.yuufa.com.git
