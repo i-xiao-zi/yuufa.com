@@ -14,13 +14,13 @@
         "static/**"
       ]
     },
-    "web": {
+    "www": {
       "dependsOn": ["^build"],
       "env": ["NODE_ENV"],
       "outputs": ["dist/**"]
     },
     "api": {
-      "dependsOn": ["web"],
+      "dependsOn": ["www"],
       "env": ["NODE_ENV"],
       "outputs": ["dist/**", ".out/**", "public/**"]
     },
