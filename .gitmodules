@@ -1,4 +1,6 @@
 [submodule "apps/api"]
 	url = git@github.com:i-xiao-zi/api.yuufa.com.git
+	path = apps/api
 [submodule "apps/www"]
 	url = git@github.com:i-xiao-zi/www.yuufa.com.git
+	path = apps/www
